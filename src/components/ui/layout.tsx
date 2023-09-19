@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { type HTMLAttributes, forwardRef } from "react";
+import { forwardRef } from "react";
+import type { HTMLAttributes, ElementType } from "react";
 
 const flexLayoutVariants = cva("flex", {
   variants: {
@@ -36,35 +37,43 @@ const flexLayoutVariants = cva("flex", {
 
 export interface FlexLayoutProps
   extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof flexLayoutVariants> {}
+    VariantProps<typeof flexLayoutVariants> {
+  element?: ElementType;
+}
 
 const Column = forwardRef<HTMLDivElement, FlexLayoutProps>(
-  ({ className, spacing, justify, items, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "flex-col",
-        flexLayoutVariants({ spacing, justify, items }),
-        className
-      )}
-      {...props}
-    />
-  )
+  ({ className, spacing, justify, items, element, ...props }, ref) => {
+    const Element = element ?? "div";
+    return (
+      <Element
+        ref={ref}
+        className={cn(
+          "flex-col",
+          flexLayoutVariants({ spacing, justify, items }),
+          className
+        )}
+        {...props}
+      />
+    );
+  }
 );
 Column.displayName = "Column";
 
 const Row = forwardRef<HTMLDivElement, FlexLayoutProps>(
-  ({ className, spacing, justify, items, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "flex-row",
-        flexLayoutVariants({ spacing, justify, items }),
-        className
-      )}
-      {...props}
-    />
-  )
+  ({ className, spacing, justify, items, element, ...props }, ref) => {
+    const Element = element ?? "div";
+    return (
+      <Element
+        ref={ref}
+        className={cn(
+          "flex-row",
+          flexLayoutVariants({ spacing, justify, items }),
+          className
+        )}
+        {...props}
+      />
+    );
+  }
 );
 Row.displayName = "Column";
 
