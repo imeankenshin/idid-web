@@ -13,12 +13,9 @@ export function omitName(name: string) {
       return name.toUpperCase();
     }
     default: {
-      const [first, second] = name.match(/[A-Z]/g) ?? ["?", undefined];
+      const parsedName = name.match(/[A-Z]/g) ?? [undefined, undefined];
       // もし大文字が二つない場合は、最初の文字と2文字目を結合する
-      if (!second) {
-        return `${first}${name[1]}`;
-      }
-      return `${first}${second}`;
+      return `${parsedName[0] ?? name[0]}${parsedName[1] ?? name[1] ?? ""}`;
     }
   }
 }
