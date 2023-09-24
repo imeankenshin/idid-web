@@ -23,10 +23,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  params,
+  modal,
 }: {
   children: React.ReactNode;
-  params: any;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -40,6 +40,7 @@ export default function RootLayout({
         <Row className="m-auto gap-4 max-w-7xl">
           <PortalMenu />
           {children}
+          <div className="absolute">{modal}</div>
         </Row>
       </body>
     </html>
