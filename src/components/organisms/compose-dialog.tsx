@@ -65,10 +65,20 @@ export default function ComposeDialog({
           </Column>
           <DialogFooter>
             <Row spacing={1} className="w-full">
-              <Button tip="Upload media" variant="ghost" size="icon">
+              <Button
+                type="button"
+                tip="Upload media"
+                variant="ghost"
+                size="icon"
+              >
                 <ImageIcon strokeWidth={1.75} />
               </Button>
-              <Button tip="Pick emoji" variant="ghost" size="icon">
+              <Button
+                type="button"
+                tip="Pick emoji"
+                variant="ghost"
+                size="icon"
+              >
                 <LaughIcon strokeWidth={1.75} />
               </Button>
             </Row>
