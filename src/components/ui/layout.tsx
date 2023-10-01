@@ -5,7 +5,8 @@ import type { HTMLAttributes, ElementType } from "react";
 
 const flexLayoutVariants = cva("flex", {
   variants: {
-    spacing: {
+    gap: {
+      0: "gap-0",
       1: "gap-1",
       2: "gap-2",
       3: "gap-3",
@@ -31,7 +32,7 @@ const flexLayoutVariants = cva("flex", {
     },
   },
   defaultVariants: {
-    spacing: 2,
+    gap: 2,
   },
 });
 
@@ -42,14 +43,14 @@ export interface FlexLayoutProps
 }
 
 const Column = forwardRef<HTMLDivElement, FlexLayoutProps>(
-  ({ className, spacing, justify, items, element, ...props }, ref) => {
+  ({ className, gap, justify, items, element, ...props }, ref) => {
     const Element = element ?? "div";
     return (
       <Element
         ref={ref}
         className={cn(
           "flex-col",
-          flexLayoutVariants({ spacing, justify, items }),
+          flexLayoutVariants({ gap, justify, items }),
           className
         )}
         {...props}
@@ -60,14 +61,14 @@ const Column = forwardRef<HTMLDivElement, FlexLayoutProps>(
 Column.displayName = "Column";
 
 const Row = forwardRef<HTMLDivElement, FlexLayoutProps>(
-  ({ className, spacing, justify, items, element, ...props }, ref) => {
+  ({ className, gap, justify, items, element, ...props }, ref) => {
     const Element = element ?? "div";
     return (
       <Element
         ref={ref}
         className={cn(
           "flex-row",
-          flexLayoutVariants({ spacing, justify, items }),
+          flexLayoutVariants({ gap, justify, items }),
           className
         )}
         {...props}

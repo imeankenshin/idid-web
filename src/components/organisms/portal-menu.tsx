@@ -8,7 +8,7 @@ import { Feather, Home, Settings2, User } from "lucide-react";
 
 export default function PortalMenu() {
   return (
-    <Column element="aside" className="p-6">
+    <Column element="aside" gap={4} className="p-6">
       <DigitalClock />
       <Column element="ul" className="gap-2 mb-8">
         <li>

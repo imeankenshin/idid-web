@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Column, Row } from "../ui/layout";
+import { Row } from "../ui/layout";
 
 export default function DigitalClock() {
   const [time, setTime] = useState(new Date());
@@ -11,25 +11,17 @@ export default function DigitalClock() {
   }, [time]);
 
   return (
-    <Column className="p-4 w-56" role="timer">
-      <Row>
-        <span className="text-6xl font-bold">
-          {time.toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: false,
-          })}
-        </span>
-        <span>{`${time.getSeconds() < 10 ? 0 : ""}${time.getSeconds()}`}</span>
-      </Row>
-      <span className="font-medium">
-        {time.toLocaleDateString("en-US", {
-          weekday: "short",
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
+    <Row className="w-56 select-none" gap={1} role="timer">
+      <span className="text-7xl font-bold">
+        {time.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: false,
         })}
       </span>
-    </Column>
+      <span className="text-lg font-medium" suppressHydrationWarning>{`${
+        time.getSeconds() < 10 ? 0 : ""
+      }${time.getSeconds()}`}</span>
+    </Row>
   );
 }
