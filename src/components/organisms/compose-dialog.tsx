@@ -23,6 +23,7 @@ export default function ComposeDialog({
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+
   const startAction = (formData: FormData) => {
     startTransition(() => {
       action(formData);
@@ -54,17 +55,19 @@ export default function ComposeDialog({
               contents.
             </DialogDescription>
           </DialogHeader>
-          <Column spacing={2}>
+          <Column gap={2}>
             <Textarea
               id="content"
               name="content"
               placeholder="What's happening?"
               rows={4}
+              maxLength={280}
+              minLength={10}
               className="w-full resize-none"
             />
           </Column>
           <DialogFooter>
-            <Row spacing={1} className="w-full">
+            <Row gap={1} className="w-full">
               <Button
                 type="button"
                 tip="Upload media"

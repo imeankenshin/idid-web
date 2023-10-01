@@ -33,7 +33,7 @@ export default function Post(props: PostProps) {
     <article>
       <Card className="w-full">
         <CardHeader className="flex-row justify-between">
-          <Row spacing={3} items="center">
+          <Row gap={3} items="center">
             <Avatar>
               <AvatarImage src={props.avatarImage} />
               {!props.avatarImage && (

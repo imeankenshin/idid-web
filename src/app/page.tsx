@@ -52,7 +52,7 @@ export default function Home() {
         <h1>
           {message()}, {userName}!
         </h1>
-        <Column element="section" spacing={4} className="flex p-4">
+        <Column element="section" gap={4} className="flex p-4">
           <Post
             userName={userName}
             avatarImage="/linn.png"
