@@ -13,15 +13,21 @@ import { Textarea } from "../ui/textarea";
 import { Column, Row } from "../ui/layout";
 import { Button } from "../ui/button";
 import { ImageIcon, LaughIcon } from "lucide-react";
-import { useCallback, type FormHTMLAttributes } from "react";
+import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 export default function ComposeDialog({
   action,
 }: {
-  action: FormHTMLAttributes<HTMLFormElement>["action"];
+  action: (formData: FormData) => void;
 }) {
   const router = useRouter();
+  const [pending, startTransition] = useTransition();
+  const startAction = (formData: FormData) => {
+    startTransition(() => {
+      action(formData);
+    });
+  };
   return (
     <Dialog
       onOpenChange={(open) => {
@@ -35,10 +41,10 @@ export default function ComposeDialog({
         <form
           onKeyDown={(event) => {
             if (event.key === "Enter" && event.metaKey) {
-              console.log("submit");
+              startAction(new FormData(event.currentTarget));
             }
           }}
-          action={action}
+          action={startAction}
           onSubmit={console.log}
         >
           <DialogHeader>
@@ -66,7 +72,9 @@ export default function ComposeDialog({
                 <LaughIcon strokeWidth={1.75} />
               </Button>
             </Row>
-            <Button type="submit">Submit it</Button>
+            <Button disabled={pending} type="submit">
+              {pending ? "Loading..." : "Submit it"}
+            </Button>
           </DialogFooter>
           <DialogClose />
         </form>
